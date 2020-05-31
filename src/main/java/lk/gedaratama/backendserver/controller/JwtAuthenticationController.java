@@ -1,6 +1,7 @@
 package lk.gedaratama.backendserver.controller;
 
 import lk.gedaratama.backendserver.resource.UserResource;
+import lk.gedaratama.backendserver.response.MessageResponse;
 import lk.gedaratama.backendserver.service.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,8 @@ public class JwtAuthenticationController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<?> saveUser(@RequestBody UserResource user) {
-        return ResponseEntity.ok(userDetailsService.userRegister(user));
+        userDetailsService.userRegister(user);
+
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 }
