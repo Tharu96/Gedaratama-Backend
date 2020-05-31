@@ -38,7 +38,7 @@ public class JwtUsernamePasswordAuthenticationFilter extends AbstractAuthenticat
     private final ObjectMapper mapper;
 
     public JwtUsernamePasswordAuthenticationFilter(JwtAuthenticationConfig jwtAuthenticationConfig, AuthenticationManager authManager) {
-        super(new AntPathRequestMatcher(GedaratamaParam.URL, "POST"));
+        super(new AntPathRequestMatcher(GedaratamaParam.LOGIN_URL, "POST"));
         setAuthenticationManager(authManager);
         this.mapper = new ObjectMapper();
         this.jwtAuthenticationConfig = jwtAuthenticationConfig;

@@ -87,7 +87,7 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
                         UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new JwtTokenAuthenticationFilter(jwtAuthenticationConfig), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers(GedaratamaParam.URL).permitAll()
+                .antMatchers(GedaratamaParam.LOGIN_URL).permitAll()
                 .antMatchers("/register").permitAll()
                 .antMatchers(HttpMethod.GET, "/hello").hasAnyRole(GedaratamaParam.USER_NORMAL, GedaratamaParam.USER_ADMIN);
     }
