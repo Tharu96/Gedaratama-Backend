@@ -28,6 +28,8 @@ public class User {
     @Column
     private String email;
 
+    private boolean active;
+
     public User() {
     }
 
@@ -37,6 +39,7 @@ public class User {
         this.setRole(user.getRole());
         this.setPassword(user.getPassword());
         this.setUuid(user.getUuid());
+
     }
 
     public String getUsername() {
@@ -85,5 +88,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

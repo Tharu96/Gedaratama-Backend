@@ -89,6 +89,7 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(GedaratamaParam.LOGIN_URL).permitAll()
                 .antMatchers("/register").permitAll()
+                .antMatchers("/shopRegister").permitAll()
                 .antMatchers(HttpMethod.GET, "/hello").hasAnyRole(GedaratamaParam.USER_NORMAL, GedaratamaParam.USER_ADMIN);
     }
 

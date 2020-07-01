@@ -1,6 +1,6 @@
 package lk.gedaratama.backendserver.jwt;
 
-import lk.gedaratama.backendserver.dao.UserDao;
+import lk.gedaratama.backendserver.repository.UserRepository;
 import lk.gedaratama.backendserver.model.User;
 import lk.gedaratama.backendserver.resource.UserCustomDetail;
 import lk.gedaratama.backendserver.resource.UserResource;
@@ -17,11 +17,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class JwtUserDetailService implements UserDetailsService {
-    private final UserDao userDao;
+    private final UserRepository userRepository;
 
     @Autowired
-    public JwtUserDetailService(UserDao userDao) {
-        this.userDao = userDao;
+    public JwtUserDetailService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     private UserResource getUserResource(User user) {
@@ -36,7 +36,7 @@ public class JwtUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User byEmailAndActive = userDao.findByEmail(email);
+        User byEmailAndActive = userRepository.findByEmail(email);
         if (byEmailAndActive == null) {
             throw new UsernameNotFoundException("Email not found.");
         }
