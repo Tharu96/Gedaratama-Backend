@@ -40,11 +40,18 @@ public class PendingShopController {
         return ResponseEntity.ok(pendingShopResourceList);
     }
 
-    @PostMapping(value = "/{uuid}")
-    public ResponseEntity<?> acceptShopPendingRequest(@PathVariable String uuid) {
-        pendingShopService.acceptShopPendingRequest(uuid);
+    @PostMapping(value = "/accept/{uuid}")
+    public ResponseEntity<?> acceptShopPendingRequest(@PathVariable("uuid") String uuid) {
+          pendingShopService.acceptShopPendingRequest(uuid);
         return ResponseEntity.ok(new MessageResponse("Success"));
     }
+
+    @DeleteMapping(value = "/delete/{uuid}")
+    public ResponseEntity<?> deleteShopPendingRequest(@PathVariable("uuid") String uuid) {
+        pendingShopService.deleteShopPendingRequest(uuid);
+        return ResponseEntity.ok(new MessageResponse("Success"));
+    }
+
 
 
 }

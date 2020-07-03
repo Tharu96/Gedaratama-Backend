@@ -51,7 +51,7 @@ public class PendingShopService {
     //Todo add isPublished boolean and published_time
     public List<PendingShopResource> getUnpublishedShopList() {
         List<PendingShopResource> pendingShopResourceList = new ArrayList<>();
-        pendingShopRepository.findAll().forEach(pendingShop -> {
+        pendingShopRepository.findAllByIsPublishedFalse().forEach(pendingShop -> {
             PendingShopResource pendingShopResource = new PendingShopResource();
             pendingShopResource.setBusinessRegNo(pendingShop.getBusinessRegNo());
             pendingShopResource.setEmail(pendingShop.getEmail());
@@ -85,10 +85,17 @@ public class PendingShopService {
         shopDetail.setUserUuid(user.getUuid());
 
         ShopDetail shopDetail1 = shopDetailService.saveShopDetail(shopDetail);
+        pendingShopRepository.publishedPendingShop(uuid);
 
         if (shopDetail1 == null) {
             //todo error handling
         }
+    }
+
+    public void deleteShopPendingRequest(String uuid) {
+         pendingShopRepository.deleteByUuid(uuid);
+
+
     }
 
 }
