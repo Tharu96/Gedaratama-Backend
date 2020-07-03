@@ -31,6 +31,11 @@ public class PendingShopService {
     @Autowired
     private PendingShopRepository pendingShopRepository;
 
+    @Autowired
+    private MailService mailService;
+
+
+
     public PendingShop savePendingShop(PendingShopResource pendingShopResource) {
         PendingShop pendingShop = new PendingShop();
         pendingShop.setShopName(pendingShopResource.getShop_name());
@@ -86,6 +91,8 @@ public class PendingShopService {
 
         ShopDetail shopDetail1 = shopDetailService.saveShopDetail(shopDetail);
         pendingShopRepository.publishedPendingShop(uuid);
+        System.out.print(user.getEmail());
+        mailService.sendEmail(user.getEmail());
 
         if (shopDetail1 == null) {
             //todo error handling
