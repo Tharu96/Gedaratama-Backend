@@ -20,8 +20,13 @@ public class MailService {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(email);
         msg.setFrom("lkgedaratama@gmail.com");
-        msg.setSubject("Welcome to GEDARATAMA Home Delivery");
-        msg.setText("Your Shop succefully registerd in Gedaratama.");
+        msg.setSubject("Welcome to GEDARATAMA The Passion of Shopping");
+        msg.setText("Congratulations!!!\n" +
+                "Your Request to Join with Gedaratama has been Approved.\n" +
+                "\n" +
+                "Now it's time for Success with the Passion of shopping in 21st Century!!!\n" +
+                "We team Gedaratama are enthusiastic to help you and we wish you good luck in your business!!!\n" +
+                "For any Clarifications, Feel Free to contact the team!!!\n"+"\n"+"Best regards");
 
         javaMailSender.send(msg);
 
