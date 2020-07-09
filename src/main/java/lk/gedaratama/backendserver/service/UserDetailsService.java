@@ -6,6 +6,7 @@ import lk.gedaratama.backendserver.jwt.JwtUserDetailService;
 import lk.gedaratama.backendserver.model.PendingShop;
 import lk.gedaratama.backendserver.model.User;
 import lk.gedaratama.backendserver.repository.UserRepository;
+import lk.gedaratama.backendserver.resource.DeliveryResource;
 import lk.gedaratama.backendserver.resource.UserResource;
 import lk.gedaratama.backendserver.util.GedaratamaParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,12 +39,12 @@ public class UserDetailsService {
         this.jwtUserDetailService = jwtUserDetailService;
     }
 
-    public User userRegister(UserResource user) {
+    public User userReg(DeliveryResource user) {
         User newUser = new User();
         newUser.setUsername(user.getUsername());
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
         newUser.setEmail(user.getEmail());
-        newUser.setRole(GedaratamaParam.USER_NORMAL);
+        newUser.setRole(GedaratamaParam.DEL_PER);
         newUser.setUuid(GedaratamaParam.getUuid());
         return userRepository.save(newUser);
     }
@@ -74,4 +75,6 @@ public class UserDetailsService {
         user.setActive(true);
         return userRepository.save(user);
     }
+
+
 }

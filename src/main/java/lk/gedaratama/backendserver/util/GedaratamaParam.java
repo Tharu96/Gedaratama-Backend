@@ -13,6 +13,7 @@ public class GedaratamaParam {
     public static final String JWT_PREFIX = "Bearer";
     public static final String USER_NORMAL = "USER";
     public static final String USER_ADMIN = "ADMIN";
+    public static final String DEL_PER = "DELIVERY";
     public static final String USER_SHOP = "SHOP";
 
     public static final String LOGIN_URL = "/login";

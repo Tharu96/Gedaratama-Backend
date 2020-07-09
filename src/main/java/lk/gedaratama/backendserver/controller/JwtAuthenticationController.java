@@ -24,7 +24,7 @@ public class JwtAuthenticationController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<?> saveUser(@RequestBody UserResource user) {
-        userDetailsService.userRegister(user);
+        userDetailsService.userReg(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
