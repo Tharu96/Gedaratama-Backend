@@ -8,4 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface ShopDetailRepository  extends JpaRepository<ShopDetail, Integer>{
 
+    ShopDetail findShopDtailByUserUuid(String uuid);
+
 }
