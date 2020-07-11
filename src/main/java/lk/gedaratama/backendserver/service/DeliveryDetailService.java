@@ -45,6 +45,17 @@ public class DeliveryDetailService {
         return userDao.save(newUser);
     }
 
+    public static DelpersonDetail getDeliveryProfileByEmail(String email){
+        DelpersonDetail viewProfileDelivery = new DelpersonDetail();
+        viewProfileDelivery.getFirstname();
+        viewProfileDelivery.getEmail();
+        viewProfileDelivery.getUsername();
+
+
+        return DeliveryDao.viewDeliveryProfileByEmail(email);
+    }
+
+
 
 
 

@@ -10,8 +10,16 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DeliveryDao extends JpaRepository<DelpersonDetail, Integer> {
 
+    static DelpersonDetail viewDeliveryProfileByEmail(String email) {
+        return null;
+    }
+
     DelpersonDetail findByEmail(String email);
 
     DelpersonDetail findByUuid(String uuid);
+
+
+
+
 
 }
