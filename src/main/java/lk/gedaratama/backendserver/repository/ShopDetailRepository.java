@@ -1,6 +1,7 @@
 package lk.gedaratama.backendserver.repository;
 
 import lk.gedaratama.backendserver.model.ShopDetail;
+import lk.gedaratama.backendserver.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -8,6 +9,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface ShopDetailRepository  extends JpaRepository<ShopDetail, Integer>{
 
+    //static ShopDetail findById(String uuid);
+
     ShopDetail findShopDtailByUserUuid(String uuid);
+
+    static ShopDetail findByUuid(String uuid);
+
+    //void shopDetailFindByUuid(String uuid);
+
+    //void saveShopDetailByUuid(String uuid);
 
 }
