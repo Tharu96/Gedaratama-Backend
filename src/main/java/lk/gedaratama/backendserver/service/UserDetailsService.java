@@ -48,6 +48,20 @@ public class UserDetailsService {
         return userRepository.save(newUser);
     }
 
+    public User registerShopUser(PendingShop pendingShop) {
+        User user = new User();
+        user.setUsername(pendingShop.getShopName());
+        user.setPassword(pendingShop.getPassword());
+        user.setEmail(pendingShop.getEmail());
+        user.setRole(GedaratamaParam.USER_SHOP);
+        user.setUuid(pendingShop.getUuid());
+        user.setActive(true);
+        return userRepository.save(user);
+    }
+
+
+
+
     private String createAccessToken(UserResource userResource) {
 
         List<SimpleGrantedAuthority> grantedAuthorityList = new ArrayList<>();
@@ -64,14 +78,5 @@ public class UserDetailsService {
                 grantedAuthorityList, jwtAuthenticationConfig.getRefreshTokenExpiration(), jwtAuthenticationConfig.getSecret());
     }
 
-    public User registerShopUser(PendingShop pendingShop) {
-        User user = new User();
-        user.setUsername(pendingShop.getShopName());
-        user.setPassword(pendingShop.getPassword());
-        user.setEmail(pendingShop.getEmail());
-        user.setRole(GedaratamaParam.USER_SHOP);
-        user.setUuid(pendingShop.getUuid());
-        user.setActive(true);
-        return userRepository.save(user);
-    }
+
 }

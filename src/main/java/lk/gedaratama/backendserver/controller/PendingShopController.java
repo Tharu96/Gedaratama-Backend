@@ -42,7 +42,7 @@ public class PendingShopController {
 
     @PostMapping(value = "/accept/{uuid}")
     public ResponseEntity<?> acceptShopPendingRequest(@PathVariable("uuid") String uuid) {
-          pendingShopService.acceptShopPendingRequest(uuid);
+        pendingShopService.acceptShopPendingRequest(uuid);
         return ResponseEntity.ok(new MessageResponse("Success"));
     }
 
