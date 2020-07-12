@@ -18,4 +18,8 @@ public class ShopDetailService {
         return shopDetailRepository.save(shopDetail);
     }
 
+    public ShopDetail getShopDetailsByUuid(String uuid){
+        return shopDetailRepository.findShopDtailByUserUuid(uuid);
+    }
+
 }
