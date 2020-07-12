@@ -22,4 +22,8 @@ public class ShopDetailService {
         return shopDetailRepository.findShopDtailByUserUuid(uuid);
     }
 
+
+
+
+
 }
