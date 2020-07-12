@@ -27,19 +27,10 @@ public class ShopDetailController {
     }
 
     @PutMapping(value="/{update/uuid}")
-    public ResponseEntity<?> updateShopProfileDetail(@PathVariable("uuid") String uuid,  @RequestBody ShopDetail shopDetail) {
-        //shopDetailService.saveShopProfileDetailByUuid(uuid);
-        //ShopDetailService.saveShopProfileDetailByUuid(uuid);
+    public ResponseEntity<?> updateShopProfileDetail(@PathVariable("uuid") String uuid,  @RequestBody ShopDetailResource shopDetailResource) {
 
-        ShopDetail updates = ShopDetailRepository.findById(uuid);
-        //.orElseThrow(() -> new ResourceNotFoundException("Shop not found for this id :: " + uuid));
 
-        updates.setShopName(shopDetail.getShopName());
-        updates.setShopOwnerName(shopDetail.getShopOwnerName());
-        updates.setMobileNo(shopDetail.getMobileNo());
-        updates.setLocation(shopDetail.getLocation());
-        updates.setEmail(shopDetail.getEmail());
-        updates.setNic(shopDetail.getNic());
+        shopDetailService.getShopUpdates(shopDetailResource, uuid);
 
         return ResponseEntity.ok(new MessageResponse("Successfully Updated"));
     }

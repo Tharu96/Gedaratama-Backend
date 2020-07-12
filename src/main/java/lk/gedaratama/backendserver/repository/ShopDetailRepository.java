@@ -9,9 +9,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface ShopDetailRepository  extends JpaRepository<ShopDetail, Integer>{
 
-    static ShopDetail findById(String uuid);
+    //static ShopDetail findById(String uuid);
 
     ShopDetail findShopDtailByUserUuid(String uuid);
+
+    static ShopDetail findByUuid(String uuid);
+
+    //void shopDetailFindByUuid(String uuid);
 
     //void saveShopDetailByUuid(String uuid);
 
