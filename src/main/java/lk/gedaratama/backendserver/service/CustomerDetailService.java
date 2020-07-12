@@ -3,9 +3,9 @@ package lk.gedaratama.backendserver.service;
 import lk.gedaratama.backendserver.config.JwtAuthenticationConfig;
 import lk.gedaratama.backendserver.config.JwtGenerator;
 import lk.gedaratama.backendserver.jwt.JwtUserDetailService;
-import lk.gedaratama.backendserver.model.PendingShop;
+import lk.gedaratama.backendserver.model.CustomerDetail;
 import lk.gedaratama.backendserver.model.User;
-import lk.gedaratama.backendserver.repository.UserRepository;
+import lk.gedaratama.backendserver.repository.CustomerDao;
 import lk.gedaratama.backendserver.resource.CustomerResource;
 import lk.gedaratama.backendserver.resource.DeliveryResource;
 import lk.gedaratama.backendserver.resource.UserResource;
@@ -18,53 +18,53 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * @author Sashini Tharuka on 5/31/2020.
- */
+import java.util.UUID;
 
 @Service
-public class UserDetailsService {
-    private final UserRepository userRepository;
+
+public class CustomerDetailService {
+    private final CustomerDao userDao;
     private final PasswordEncoder bcryptEncoder;
     private final JwtAuthenticationConfig jwtAuthenticationConfig;
     private final AuthenticationManager authenticationManager;
     private final JwtUserDetailService jwtUserDetailService;
 
     @Autowired
-    public UserDetailsService(UserRepository userRepository, PasswordEncoder bcryptEncoder, JwtAuthenticationConfig jwtAuthenticationConfig, AuthenticationManager authenticationManager, JwtUserDetailService jwtUserDetailService) {
-        this.userRepository = userRepository;
+    private UserDetailsService userDetailsService;
+
+    @Autowired
+    private CustomerDao customerDao;
+
+    public CustomerDetail saveCustomerDetails(CustomerResource customerResource){
+        User user = userDetailsService.CustomerRegisterUser(customerResource);
+        CustomerDetail customerDetail= new CustomerDetail();
+        customerDetail.setUuid(user.getUuid());
+        customerDetail.setEmail(customerResource.getEmail());
+        customerDetail.setUsername(customerResource.getUsername());
+        return customerDao.save(customerDetail);
+
+    }
+
+    @Autowired
+    //c onsructor ekak hadala
+    public CustomerDetailService(CustomerDao userDao, PasswordEncoder bcryptEncoder, JwtAuthenticationConfig jwtAuthenticationConfig, AuthenticationManager authenticationManager, JwtUserDetailService jwtUserDetailService) {
+        this.userDao = userDao;
         this.bcryptEncoder = bcryptEncoder;
         this.jwtAuthenticationConfig = jwtAuthenticationConfig;
         this.authenticationManager = authenticationManager;
         this.jwtUserDetailService = jwtUserDetailService;
     }
 
-    public User userReg(DeliveryResource user) {
-        User newUser = new User();
+    public CustomerDetail userRegister(CustomerResource user) {
+        //user entity ekak hadala tyenne, e kiyanne table ekata galapenna hadala tyenne
+        CustomerDetail newUser = new CustomerDetail();
         newUser.setUsername(user.getUsername());
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
         newUser.setEmail(user.getEmail());
-        newUser.setRole(GedaratamaParam.DEL_PER);
-        newUser.setUuid(GedaratamaParam.getUuid());
-        return userRepository.save(newUser);
+
+        newUser.setUuid(UUID.randomUUID().toString());
+        return userDao.save(newUser);
     }
-
-    public User CustomerRegisterUser(CustomerResource customerResource){
-       User user = new User();
-       user.setUsername(customerResource.getUsername());
-       user.setPassword(bcryptEncoder.encode(customerResource.getPassword()));
-       user.setUuid(GedaratamaParam.getUuid());
-       user.setEmail(customerResource.getEmail());
-       user.setRole(GedaratamaParam.USER_NORMAL);
-       user.setActive(true);
-       return userRepository.save(user);
-
-    }
-
-
-
-
 
     private String createAccessToken(UserResource userResource) {
 
@@ -82,16 +82,7 @@ public class UserDetailsService {
                 grantedAuthorityList, jwtAuthenticationConfig.getRefreshTokenExpiration(), jwtAuthenticationConfig.getSecret());
     }
 
-    public User registerShopUser(PendingShop pendingShop) {
-        User user = new User();
-        user.setUsername(pendingShop.getShopName());
-        user.setPassword(pendingShop.getPassword());
-        user.setEmail(pendingShop.getEmail());
-        user.setRole(GedaratamaParam.USER_SHOP);
-        user.setUuid(pendingShop.getUuid());
-        user.setActive(true);
-        return userRepository.save(user);
-    }
-
+   /* public void userRegister(DeliveryResource user) {
+    }*/
 
 }

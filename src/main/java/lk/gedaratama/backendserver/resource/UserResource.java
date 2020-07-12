@@ -4,7 +4,7 @@ package lk.gedaratama.backendserver.resource;
  *  @author Sashini Tharuka on 5/31/2020.
  */
 
-public class UserResource {
+public class UserResource extends DeliveryResource {
     private String username;
     private String password;
     private String uuid;
