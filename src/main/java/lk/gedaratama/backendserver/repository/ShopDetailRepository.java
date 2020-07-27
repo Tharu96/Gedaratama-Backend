@@ -12,8 +12,7 @@ public interface ShopDetailRepository  extends JpaRepository<ShopDetail, Integer
     //static ShopDetail findById(String uuid);
 
     ShopDetail findShopDtailByUserUuid(String uuid);
-
-    static ShopDetail findByUuid(String uuid);
+    ShopDetail findByUuid(String uuid);
 
     //void shopDetailFindByUuid(String uuid);
 

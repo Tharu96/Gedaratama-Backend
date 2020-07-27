@@ -25,7 +25,7 @@ public class ShopDetailService {
 
     public ShopDetail getShopUpdates(ShopDetailResource shopDetailResource, String uuid){
 
-        ShopDetail existingShop= ShopDetailRepository.findByUuid(uuid);
+        ShopDetail existingShop= shopDetailRepository.findShopDtailByUserUuid(uuid);
         existingShop.setShopName(shopDetailResource.getShopName());
         existingShop.setShopOwnerName(shopDetailResource.getShopOwnerName());
         existingShop.setMobileNo(shopDetailResource.getMobileNo());
